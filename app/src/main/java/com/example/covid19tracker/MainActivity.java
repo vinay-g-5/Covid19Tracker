@@ -39,26 +39,20 @@ public class MainActivity extends AppCompatActivity {
 
         ApiService apiService = retrofit.create(ApiService.class);
 
-        apiService.getCovid().enqueue(new Callback<Covid>() {
+        apiService.getCovid().enqueue(new Callback<Summary>() {
             @Override
-            public void onResponse(Call<Covid> call, Response<Covid> response) {
-                Log.d("TAG", "onResponse: " + response.message());
-                Log.d("TAG", "onResponse: " + response.code());
-                if (response.isSuccessful()) {
-
-                covidArrayList = response.body().getCovidArrayList();
-                Log.d("TAG", "onResponse: " + covidArrayList.get(0).getCountryName());
-                Log.d("TAG", "onResponse: " + covidArrayList.get(0).getNewCases());
-                Log.d("TAG", "onResponse: " + covidArrayList.get(0).getTotalCases());
-                adapter = new Adapter(covidArrayList);
-                recyclerView.setAdapter(adapter);
+            public void onResponse(Call<Summary> call, Response<Summary> response) {
+                if (response.isSuccessful()){
+                    covidArrayList = response.body().getCovidArrayList();
+                    adapter = new Adapter(covidArrayList);
+                    recyclerView.setAdapter(adapter);
+                }
             }
 
             @Override
-            public void onFailure(Call<Summary> call, Throwable t){
-                Toast.makeText(MainActivity.this, "Check internet!!!", Toast.LENGTH_SHORT).show();
-                Log.d("TAG", "onFailure: " + t.getMessage());
-                Log.d("TAG", "onFailure: " + t.toString());
+            public void onFailure(Call<Summary> call, Throwable t) {
+                Log.d("TAG", "onFailure: " + t.getMessage());;
+                Toast.makeText(MainActivity.this, "Check internet!!", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -47,7 +47,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         TextView tvCountryName,tvTotalCases,tvNewCases;
 
         public ViewHolder( @NonNull View view) {
-            super(itemView);
+            super(view);
             tvCountryName = itemView.findViewById(R.id.tvCountry);
             tvTotalCases = itemView.findViewById(R.id.tvTotalCases);
             tvNewCases = itemView.findViewById(R.id.tvNewCases);
